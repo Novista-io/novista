@@ -3,7 +3,13 @@ import { ArrowUpRight } from "lucide-react";
 
 import { Logo } from "@/components/layout/Logo";
 import { Container } from "@/components/ui/Container";
-import { contact, footerNav, site, socialLinks } from "@/content/site";
+import {
+  contact,
+  footerNav,
+  site,
+  socialLinks,
+  telHref,
+} from "@/content/site";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -36,16 +42,19 @@ export function Footer() {
                 </dd>
               </div>
 
-              {contact.phone ? (
+              {contact.phones.length > 0 ? (
                 <div className="rule-dark flex items-baseline justify-between gap-4 pt-3">
                   <dt className="eyebrow text-night-muted">Phone</dt>
-                  <dd>
-                    <a
-                      href={`tel:${contact.phone.replace(/\s+/g, "")}`}
-                      className="text-night-ink underline-offset-4 transition-opacity duration-200 hover:opacity-60 hover:underline"
-                    >
-                      {contact.phone}
-                    </a>
+                  <dd className="flex flex-col items-end gap-1">
+                    {contact.phones.map((phone) => (
+                      <a
+                        key={phone}
+                        href={telHref(phone)}
+                        className="text-night-ink underline-offset-4 transition-opacity duration-200 hover:opacity-60 hover:underline"
+                      >
+                        {phone}
+                      </a>
+                    ))}
                   </dd>
                 </div>
               ) : null}

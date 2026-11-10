@@ -21,7 +21,7 @@ Open http://localhost:3000.
 | Script              | What it does                                   |
 | ------------------- | ---------------------------------------------- |
 | `npm run dev`       | Dev server (Turbopack)                          |
-| `npm run build`     | Production build; prerenders every public page  |
+| `npm run build`     | Production build (webpack); prerenders every page |
 | `npm start`         | Serve the production build                      |
 | `npm run lint`      | ESLint                                          |
 | `npm run typecheck` | TypeScript, no emit                             |
@@ -279,7 +279,15 @@ the only one is the analytics ID.
 
 ## Deploying
 
-Any Node host works. On Vercel it is zero-config.
+Any Node host works. On Vercel it is zero-config. The site is live on
+Hostinger, which builds every push to `main` with `npm run build`.
+
+`npm run build` uses webpack (`next build --webpack`), not Turbopack.
+Turbopack runs PostCSS in a separate Node process, and on Hostinger's build
+servers that process exits before Turbopack can connect to it ("node process
+exited before we could connect to it"), so the Turbopack build fails there.
+Keep `--webpack` while the site is on Hostinger. Local `npm run dev` still
+uses Turbopack.
 
 1. Set `NEXT_PUBLIC_SITE_URL` to the production origin.
 2. Configure contact form delivery (Resend or webhook).

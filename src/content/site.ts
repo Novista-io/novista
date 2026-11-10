@@ -58,8 +58,11 @@ export const site = {
 export const contact = {
   email: "hello@novista.io",
   salesEmail: "hello@novista.io",
-  /** e.g. "+92 300 1234567" */
-  phone: "+92 339 4924171" as string | null,
+  /**
+   * Shown in this order on the contact page and in the footer, e.g.
+   * "+92 300 1234567". An empty list hides the phone line everywhere.
+   */
+  phones: ["+92 339 4924171", "+92 304 7884449"] as readonly string[],
   /** Shown on the contact page and used for LocalBusiness schema when complete. */
   address: null as null | {
     street: string;
@@ -74,6 +77,9 @@ export const contact = {
   /** IANA-style hours note shown next to the form. */
   responseTime: "We reply to every enquiry within one business day.",
 } as const;
+
+/** `tel:` link for a display number such as "+92 300 1234567". */
+export const telHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, "")}`;
 
 /**
  * Floating WhatsApp button.

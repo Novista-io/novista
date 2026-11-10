@@ -9,7 +9,7 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { homepageFaqs } from "@/content/faqs";
 import { FaqList } from "@/components/ui/Accordion";
 import { processSteps } from "@/content/process";
-import { contact, site } from "@/content/site";
+import { contact, site, telHref } from "@/content/site";
 import { breadcrumbSchema, buildMetadata, faqSchema, webPageSchema } from "@/lib/seo";
 
 const TITLE = "Contact Us";
@@ -74,24 +74,25 @@ export default function ContactPage() {
                       </a>
                     </li>
 
-                    {contact.phone ? (
-                      <li>
-                        <a
-                          href={`tel:${contact.phone.replace(/\s+/g, "")}`}
-                          className="group flex items-start gap-3"
-                        >
-                          <span className="bg-surface-2 text-ink grid size-9 shrink-0 place-items-center rounded-xl">
-                            <Phone aria-hidden="true" className="size-4" />
+                    {contact.phones.length > 0 ? (
+                      <li className="flex items-start gap-3">
+                        <span className="bg-surface-2 text-ink grid size-9 shrink-0 place-items-center rounded-xl">
+                          <Phone aria-hidden="true" className="size-4" />
+                        </span>
+                        <span>
+                          <span className="text-muted block eyebrow">
+                            Phone
                           </span>
-                          <span>
-                            <span className="text-muted block eyebrow">
-                              Phone
-                            </span>
-                            <span className="text-muted group-hover:text-accent-2 block font-medium transition-colors duration-200">
-                              {contact.phone}
-                            </span>
-                          </span>
-                        </a>
+                          {contact.phones.map((phone) => (
+                            <a
+                              key={phone}
+                              href={telHref(phone)}
+                              className="text-muted hover:text-accent-2 block font-medium transition-colors duration-200"
+                            >
+                              {phone}
+                            </a>
+                          ))}
+                        </span>
                       </li>
                     ) : null}
 
