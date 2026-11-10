@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { LegalPage } from "@/components/sections/LegalPage";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -18,7 +19,7 @@ const DESCRIPTION =
   "How Novista Solutions collects, uses and protects personal information submitted through novista.io.";
 
 /** Bump whenever the policy text changes. */
-const UPDATED_AT = "2026-09-14";
+const UPDATED_AT = "2026-11-10";
 
 export const metadata: Metadata = buildMetadata({
   title: TITLE,
@@ -53,6 +54,11 @@ export default function PrivacyPolicyPage() {
           {site.legalName} operates this website. For any question about this
           policy or about data we hold, contact us at{" "}
           <a href={`mailto:${contact.email}`}>{contact.email}</a>.
+        </p>
+        <p>
+          This policy covers this website. Each of our apps and games has its
+          own privacy policy; you can find them all on{" "}
+          <Link href="/policy">app privacy policies</Link>.
         </p>
 
         <h2>What we collect</h2>

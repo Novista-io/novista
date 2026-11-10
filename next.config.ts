@@ -89,6 +89,7 @@ const nextConfig: NextConfig = {
       { source: "/blog", destination: "/insights", permanent: true },
       { source: "/blog/:slug", destination: "/insights/:slug", permanent: true },
       { source: "/privacy", destination: "/privacy-policy", permanent: true },
+      { source: "/policies", destination: "/policy", permanent: true },
       { source: "/terms-and-conditions", destination: "/terms", permanent: true },
       { source: "/work", destination: "/case-studies", permanent: true },
       { source: "/faqs", destination: "/faq", permanent: true },
