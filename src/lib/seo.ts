@@ -146,15 +146,16 @@ export function organizationSchema() {
           },
         }
       : {}),
-    contactPoint: [
-      {
+    // One ContactPoint per number, since `telephone` holds a single value.
+    contactPoint: (contact.phones.length > 0 ? contact.phones : [null]).map(
+      (phone) => ({
         "@type": "ContactPoint",
         contactType: "sales",
         email: contact.email,
-        ...(contact.phone ? { telephone: contact.phone } : {}),
+        ...(phone ? { telephone: phone } : {}),
         availableLanguage: ["English"],
-      },
-    ],
+      }),
+    ),
   };
 }
 
