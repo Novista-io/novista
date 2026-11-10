@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { caseStudies } from "@/content/case-studies";
 import { posts } from "@/content/insights";
+import { policies } from "@/content/policies";
 import { products } from "@/content/products";
 import { services } from "@/content/services";
 import { absoluteUrl } from "@/lib/seo";
@@ -31,6 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/contact", priority: 0.8, changeFrequency: "yearly" },
     { path: "/faq", priority: 0.7, changeFrequency: "monthly" },
     { path: "/privacy-policy", priority: 0.3, changeFrequency: "yearly" },
+    { path: "/policy", priority: 0.3, changeFrequency: "monthly" },
     { path: "/terms", priority: 0.3, changeFrequency: "yearly" },
   ];
 
@@ -61,6 +63,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "yearly" as const,
       priority: 0.6,
+    })),
+
+    ...policies.map((policy) => ({
+      url: absoluteUrl(`/policy/${policy.slug}`),
+      lastModified: new Date(`${policy.updatedAt}T00:00:00Z`),
+      changeFrequency: "yearly" as const,
+      priority: 0.3,
     })),
 
     ...posts.map((post) => ({

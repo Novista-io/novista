@@ -187,6 +187,7 @@ export const footerNav = {
     { label: "Solutions", href: "/solutions" },
     { label: "FAQs", href: "/faq" },
     { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "App Privacy Policies", href: "/policy" },
     { label: "Terms & Conditions", href: "/terms" },
   ],
 } as const;

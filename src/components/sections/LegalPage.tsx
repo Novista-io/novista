@@ -11,13 +11,16 @@ export function LegalPage({
   intro,
   updatedAt,
   crumbs,
+  prose = true,
   children,
 }: {
   title: string;
   intro: string;
-  /** ISO date the policy last changed. */
-  updatedAt: string;
+  /** ISO date the policy last changed. Index pages leave it out. */
+  updatedAt?: string;
   crumbs: Crumb[];
+  /** Off for pages whose body is components rather than policy text. */
+  prose?: boolean;
   children: React.ReactNode;
 }) {
   return (
@@ -32,16 +35,18 @@ export function LegalPage({
 
           <p className="text-muted mt-5 text-lg leading-relaxed">{intro}</p>
 
-          <p className="text-muted mt-6 text-sm">
-            Last updated{" "}
-            <time dateTime={updatedAt}>{formatDate(updatedAt)}</time>
-          </p>
+          {updatedAt ? (
+            <p className="text-muted mt-6 text-sm">
+              Last updated{" "}
+              <time dateTime={updatedAt}>{formatDate(updatedAt)}</time>
+            </p>
+          ) : null}
         </Container>
       </header>
 
       <Container size="narrow" className="pb-18 sm:pb-24">
         <div
-          className={[
+          className={!prose ? undefined : [
             // Section headings
             "[&_h2]:font-display [&_h2]:text-ink [&_h2]:mt-12 [&_h2]:mb-3 [&_h2]:scroll-mt-28 [&_h2]:text-xl [&_h2]:font-semibold sm:[&_h2]:text-2xl",
             "[&_h3]:font-display [&_h3]:text-ink [&_h3]:mt-8 [&_h3]:mb-2 [&_h3]:text-lg [&_h3]:font-semibold",
